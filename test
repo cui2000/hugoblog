@@ -1,0 +1,348 @@
+{
+  "log": {
+    "level": "warn",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "dns_proxy",
+        "address": "https://1.1.1.1/dns-query",
+        "detour": "select"
+      },
+      {
+        "tag": "dns_direct",
+        "address": "223.5.5.5"
+      },
+      {
+        "tag": "block",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "rule_set": "geosite-category-ads-all",
+        "server": "block",
+        "disable_cache": true
+      },
+      {
+        "rule_set": "geosite-geolocation-!cn",
+        "server": "dns_proxy"
+      }
+    ],
+    "strategy": "prefer_ipv6",
+    "final": "dns_direct"
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "inet4_address": "172.19.0.1/30",
+      "inet6_address": "fdfe:dcba:9876::1/126",
+      "auto_route": true,
+      "strict_route": true,
+      "sniff": true
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "select",
+      "outbounds": [
+        "HK-proxy","JP-proxy","US-proxy"
+      ],
+      "default": "US-proxy"
+    },
+    {
+      "type": "hysteria2",
+      "tag": "US-hy2-oracle",
+      "server": "64.181.240.49",
+      "server_port": 20010,
+      "up_mbps": 0,
+      "down_mbps": 0,
+      "password": "cui1986",
+      "tls": {
+        "enabled": true,
+        "server_name": "sj.momingqimiaoderensheng.xyz",
+        "insecure": false,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "JP-hy2-oracle-arm",
+      "server": "141.147.158.25",
+      "server_port": 20010,
+      "password": "cui1986",
+      "tls": {
+        "enabled": true,
+        "server_name": "oo.momingqimiaoderensheng.xyz",
+        "insecure": false,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "JP-hy2-oracle-amd",
+      "server": "141.147.157.196",
+      "server_port": 20010,
+      "password": "cui1986",
+      "tls": {
+        "enabled": true,
+        "server_name": "o.momingqimiaoderensheng.xyz",
+        "insecure": false,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "JP-hy2-akile",
+      "server": "181.214.136.169",
+      "server_port": 20010,
+      "password": "cui1986",
+      "tls": {
+        "enabled": true,
+        "server_name": "akile.momingqimiaoderensheng.xyz",
+        "insecure": false,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "JP-hy2-dv",
+      "server": "172.84.92.71",
+      "server_port": 20010,
+      "password": "cui1986",
+      "tls": {
+        "enabled": true,
+        "server_name": "dv.momingqimiaoderensheng.xyz",
+        "insecure": false,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "HK-hy2-tencent",
+      "server": "43.154.224.9",
+      "server_port": 20010,
+      "password": "cui1986",
+      "tls": {
+        "enabled": true,
+        "server_name": "help.momingqimiaoderensheng.xyz",
+        "insecure": false,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "HK-hy2-hosthatch",
+      "server": "103.69.128.31",
+      "server_port": 20010,
+      "password": "cui1986",
+      "tls": {
+        "enabled": true,
+        "server_name": "status6.momingqimiaoderensheng.xyz",
+        "insecure": false,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "HK-hy2-diylink",
+      "server": "156.255.90.186",
+      "server_port": 20010,
+      "password": "cui1986",
+      "tls": {
+        "enabled": true,
+        "server_name": "diylink.momingqimiaoderensheng.xyz",
+        "insecure": false,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "US-hy2-hostodo",
+      "server": "158.51.126.63",
+      "server_port": 20010,
+      "password": "cui1986",
+      "tls": {
+        "enabled": true,
+        "server_name": "hostodo.momingqimiaoderensheng.xyz",
+        "insecure": false,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "US-hy2-ft",
+      "server": "205.185.125.36",
+      "server_port": 20010,
+      "password": "cui1986",
+      "tls": {
+        "enabled": true,
+        "server_name": "ft6.momingqimiaoderensheng.xyz",
+        "insecure": false,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "US-hy2-cc",
+      "server": "74.48.170.202",
+      "server_port": 20010,
+      "password": "cui1986",
+      "tls": {
+        "enabled": true,
+        "server_name": "test.momingqimiaoderensheng.xyz",
+        "insecure": false,
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "selector",
+      "tag": "HK-proxy",
+      "outbounds": [
+        "HK-hy2-tencent","HK-hy2-hosthatch","HK-hy2-diylink"
+      ],
+      "default": "HK-hy2-hosthatch"
+    },
+    {
+      "type": "selector",
+      "tag": "US-proxy",
+      "outbounds": [
+        "US-hy2-oracle","US-hy2-hostodo","US-hy2-ft","US-hy2-cc"
+      ],
+      "default": "US-hy2-oracle"
+    },
+    {
+      "type": "selector",
+      "tag": "JP-proxy",
+      "outbounds": [
+        "JP-hy2-oracle-arm","JP-hy2-oracle-amd","JP-hy2-akile","JP-hy2-dv"
+      ],
+      "default": "JP-hy2-oracle-arm"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      },
+      {
+        "rule_set": "geosite-category-ads-all",
+        "outbound": "block"
+      },
+      {
+        "clash_mode": "global",
+        "outbound": "select"
+      },
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "rule_set": ["geoip-cn","geosite-cn"]	    
+          },
+          {
+            "ip_is_private": true
+          },
+          {
+            "clash_mode": "direct"
+          }
+        ],
+        "outbound": "direct"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "geosite-geolocation-!cn"
+          },
+          {
+            "rule_set": "geoip-cn",
+            "invert": true
+          }
+        ],
+        "outbound": "select"
+      }
+    ],
+    "rule_set": [
+      {
+        "tag": "geoip-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+        "download_detour": "select"
+      },
+      {
+        "tag": "geosite-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+        "download_detour": "select"
+      },
+      {
+        "tag": "geosite-geolocation-!cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
+        "download_detour": "select"
+      },
+      {
+        "tag": "geosite-category-ads-all",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
+        "download_detour": "select"
+      }
+    ],
+    "auto_detect_interface": true
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true
+    },
+    "clash_api": {
+      "external_controller": "0.0.0.0:9090",
+      "external_ui": "metacubexd",
+      "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
+      "external_ui_download_detour": "select",
+      "default_mode": "rule"
+    }
+  }
+}
